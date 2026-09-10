@@ -1,3 +1,3 @@
 Расчет моментов для люка в погреб, состоящего из двух дверей со смещенными друг относительно друга осями, соединенными между собой тросиком.
 
-![Схема]([https://github.com/bvg-123/LUK/blob/master/.codeimages/img-config.png?raw=true])
+![Схема](https://github.com/bvg-123/LUK/blob/master/.codeimages/img-config.png?raw=true)
