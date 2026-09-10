@@ -1,4 +1,4 @@
-#include "Config.h"
+ï»¿#include "Config.h"
 #include "Door.h"
 #include <math.h>
 #include <sstream>
@@ -42,18 +42,18 @@ Point Door::getMassCenter() {
 
 std::wstring Door::printAngle() {
   std::wostringstream sstream;
-  sstream << std::setprecision(0) << std::fixed << this->angle*180/PI << L"°";
+  sstream << std::setprecision(0) << std::fixed << this->angle*180/PI << L"Â°";
   return sstream.str();
 }
 
 std::wstring Door::printMoment() {
   std::wostringstream sstream;
-  sstream << std::setprecision(0) << std::fixed << this->getMoment() << L" Íì";
+  sstream << std::setprecision(0) << std::fixed << this->getMoment() << L" ÐÐ¼";
   return sstream.str();
 }
 
 
-/** Ðó÷êà äâåðè */
+/** Ð ÑƒÑ‡ÐºÐ° Ð´Ð²ÐµÑ€Ð¸ */
 Point Door::getGripPoint() {
   return {
     this->axis.x+(this->length)*cos(this->angle),
@@ -61,12 +61,12 @@ Point Door::getGripPoint() {
   };
 }
 
-/** Ìîìåíò âðàùåíèÿ äâåðè îòíîñèòåëüíî îñè äâåðè */
+/** ÐœÐ¾Ð¼ÐµÐ½Ñ‚ Ð²Ñ€Ð°Ñ‰ÐµÐ½Ð¸Ñ Ð´Ð²ÐµÑ€Ð¸ Ð¾Ñ‚Ð½Ð¾ÑÐ¸Ñ‚ÐµÐ»ÑŒÐ½Ð¾ Ð¾ÑÐ¸ Ð´Ð²ÐµÑ€Ð¸ */
 float Door::getMoment() {
   return this->getMoment(this->axis);
 }
 
-/** Ìîìåíò âðàùåíèÿ äâåðè îòíîñèòåëüíî çàäàííîé òî÷êè */
+/** ÐœÐ¾Ð¼ÐµÐ½Ñ‚ Ð²Ñ€Ð°Ñ‰ÐµÐ½Ð¸Ñ Ð´Ð²ÐµÑ€Ð¸ Ð¾Ñ‚Ð½Ð¾ÑÐ¸Ñ‚ÐµÐ»ÑŒÐ½Ð¾ Ð·Ð°Ð´Ð°Ð½Ð½Ð¾Ð¹ Ñ‚Ð¾Ñ‡ÐºÐ¸ */
 float Door::getMoment(const Point &point) {
   float weightArm = sqrt(pow((this->massCenter->x - point.x), 2) + pow((this->massCenter->y - point.y), 2))*cosf(this->angle);
   float moment = this->weight*G*weightArm;

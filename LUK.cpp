@@ -1,4 +1,4 @@
-#include <windows.h>
+п»ї#include <windows.h>
 #include <iostream>
 #include <iomanip>
 #include <io.h>
@@ -31,7 +31,7 @@ bool getBottomDoorAngle(float x1, float y1, float R1, float x2, float y2, float 
     *bottomDoorAngle = 0;
     return false;
   }
-  *y = min((-b+sqrt(D))/2/a, (-b-sqrt(D))/2/a);  // берем нижнюю точку пересечения окружностей как физический вариант.
+  *y = min((-b+sqrt(D))/2/a, (-b-sqrt(D))/2/a);  // Р±РµСЂРµРј РЅРёР¶РЅСЋСЋ С‚РѕС‡РєСѓ РїРµСЂРµСЃРµС‡РµРЅРёСЏ РѕРєСЂСѓР¶РЅРѕСЃС‚РµР№ РєР°Рє С„РёР·РёС‡РµСЃРєРёР№ РІР°СЂРёР°РЅС‚.
   *x = *y*(y2-y1)/(x1-x2)+z;
   if (*y < y1) {
     *y = 0;
@@ -67,49 +67,49 @@ int main()
 {
   initConsole();
 
-  wprintf(L"Расчет моментов.\n");
-  wprintf(L"Количество амортизаторов: %d\n", AMMO_COUNT);
-  wprintf(L"Усилие амортизатора: %.0f Н\n", AMMO_FORCE);
-  wprintf(L"Расстояние по вертикали от неподвижной оси амортизатора до оси верхней двери: %.1f см\n", AMMO_AXIS_VERTICAL_OFFSET*100);
-  wprintf(L"Расстояние по горизонтали от неподвижной оси амортизатора до оси верхней двери: %.1f см\n", AMMO_AXIS_HORIZONTAL_OFFSET*100);
+  wprintf(L"Р Р°СЃС‡РµС‚ РјРѕРјРµРЅС‚РѕРІ.\n");
+  wprintf(L"РљРѕР»РёС‡РµСЃС‚РІРѕ Р°РјРѕСЂС‚РёР·Р°С‚РѕСЂРѕРІ: %d\n", AMMO_COUNT);
+  wprintf(L"РЈСЃРёР»РёРµ Р°РјРѕСЂС‚РёР·Р°С‚РѕСЂР°: %.0f Рќ\n", AMMO_FORCE);
+  wprintf(L"Р Р°СЃСЃС‚РѕСЏРЅРёРµ РїРѕ РІРµСЂС‚РёРєР°Р»Рё РѕС‚ РЅРµРїРѕРґРІРёР¶РЅРѕР№ РѕСЃРё Р°РјРѕСЂС‚РёР·Р°С‚РѕСЂР° РґРѕ РѕСЃРё РІРµСЂС…РЅРµР№ РґРІРµСЂРё: %.1f СЃРј\n", AMMO_AXIS_VERTICAL_OFFSET*100);
+  wprintf(L"Р Р°СЃСЃС‚РѕСЏРЅРёРµ РїРѕ РіРѕСЂРёР·РѕРЅС‚Р°Р»Рё РѕС‚ РЅРµРїРѕРґРІРёР¶РЅРѕР№ РѕСЃРё Р°РјРѕСЂС‚РёР·Р°С‚РѕСЂР° РґРѕ РѕСЃРё РІРµСЂС…РЅРµР№ РґРІРµСЂРё: %.1f СЃРј\n", AMMO_AXIS_HORIZONTAL_OFFSET*100);
 
   Model* model = new Model();
-  std::wcout << L"Угол верхней двери";
+  std::wcout << L"РЈРіРѕР» РІРµСЂС…РЅРµР№ РґРІРµСЂРё";
   std::wcout << ", ";
-  std::wcout << L"Угол нижней двери";
+  std::wcout << L"РЈРіРѕР» РЅРёР¶РЅРµР№ РґРІРµСЂРё";
   std::wcout << ", ";
-  std::wcout << L"Длина амортизатора";
+  std::wcout << L"Р”Р»РёРЅР° Р°РјРѕСЂС‚РёР·Р°С‚РѕСЂР°";
   std::wcout << ", ";
-  std::wcout << L"Угол амортизатора";
+  std::wcout << L"РЈРіРѕР» Р°РјРѕСЂС‚РёР·Р°С‚РѕСЂР°";
   std::wcout << ", ";
-  std::wcout << L"Момент нижней двери";
+  std::wcout << L"РњРѕРјРµРЅС‚ РЅРёР¶РЅРµР№ РґРІРµСЂРё";
   std::wcout << ", ";
-  std::wcout << L"Сила на ручке нижней двери";
+  std::wcout << L"РЎРёР»Р° РЅР° СЂСѓС‡РєРµ РЅРёР¶РЅРµР№ РґРІРµСЂРё";
   std::wcout << ", ";
-  std::wcout << L"Угол силы на ручке нижней двери";
+  std::wcout << L"РЈРіРѕР» СЃРёР»С‹ РЅР° СЂСѓС‡РєРµ РЅРёР¶РЅРµР№ РґРІРµСЂРё";
   std::wcout << ", ";
-  std::wcout << L"Сила на ручке верхней двери";
+  std::wcout << L"РЎРёР»Р° РЅР° СЂСѓС‡РєРµ РІРµСЂС…РЅРµР№ РґРІРµСЂРё";
   std::wcout << ", ";
-  std::wcout << L"Угол силы на ручке верхней двери";
+  std::wcout << L"РЈРіРѕР» СЃРёР»С‹ РЅР° СЂСѓС‡РєРµ РІРµСЂС…РЅРµР№ РґРІРµСЂРё";
   std::wcout << ", ";
   std::wcout << std::endl;
 
   float angleStep = 1 * PI / 180;
   float angle = 0;
   while(model->setTopDoorAngle(angle)) {
-    // Угол верхней двери:
+    // РЈРіРѕР» РІРµСЂС…РЅРµР№ РґРІРµСЂРё:
     std::wcout << model->topDoor->printAngle() << ", ";
-    // Угол нижней двери:
+    // РЈРіРѕР» РЅРёР¶РЅРµР№ РґРІРµСЂРё:
     std::wcout << (model->isCordTense ? model->bottomDoor->printAngle() : std::wstring(L"-")) << ", ";
-    // Длина амортизатора:
-    std::wcout << std::setprecision(2) << std::fixed << model->ammoLength << L" м, ";
-    // Угол амортизатора:
-    std::wcout << std::setprecision(0) << std::fixed << model->ammoAngle*180/PI << L"°, ";
-    // Момент нижней двери:
+    // Р”Р»РёРЅР° Р°РјРѕСЂС‚РёР·Р°С‚РѕСЂР°:
+    std::wcout << std::setprecision(2) << std::fixed << model->ammoLength << L" Рј, ";
+    // РЈРіРѕР» Р°РјРѕСЂС‚РёР·Р°С‚РѕСЂР°:
+    std::wcout << std::setprecision(0) << std::fixed << model->ammoAngle*180/PI << L"В°, ";
+    // РњРѕРјРµРЅС‚ РЅРёР¶РЅРµР№ РґРІРµСЂРё:
     std::wcout << (model->isCordTense ? model->bottomDoor->printMoment() : std::wstring(L"-")) << ", ";
-    // Сила для компенсации момента на ручке нижней двери:
+    // РЎРёР»Р° РґР»СЏ РєРѕРјРїРµРЅСЃР°С†РёРё РјРѕРјРµРЅС‚Р° РЅР° СЂСѓС‡РєРµ РЅРёР¶РЅРµР№ РґРІРµСЂРё:
     std::wcout << (model->isCordTense ? model->bottomDoorGripForce->print() : std::wstring(L"-, -")) << ", ";
-    // Сила для компенсации момента на ручке верхней двери:
+    // РЎРёР»Р° РґР»СЏ РєРѕРјРїРµРЅСЃР°С†РёРё РјРѕРјРµРЅС‚Р° РЅР° СЂСѓС‡РєРµ РІРµСЂС…РЅРµР№ РґРІРµСЂРё:
     std::wcout << model->topDoorGripForce->print();
     std::wcout << std::endl;
     angle += angleStep;

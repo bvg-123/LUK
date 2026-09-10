@@ -1,4 +1,4 @@
-#include "ModelRenderer.h"
+ï»¿#include "ModelRenderer.h"
 #include "Config.h"
 
 ModelRenderer::ModelRenderer(Model* model, int width, int height, float scale): BaseRenderer() {
@@ -29,7 +29,7 @@ void ModelRenderer::drawCord() {
   Point p1 = this->model->bottomDoor->getGripPoint();
   Point p2 = this->model->topDoor->getGripPoint();
   this->drawLine(&p1, &p2);
-  // Ïîñëå drawLine p1 è p2 èìåþò óæå ýêðàííûé ìàñøòàá.
+  // ÐŸÐ¾ÑÐ»Ðµ drawLine p1 Ð¸ p2 Ð¸Ð¼ÐµÑŽÑ‚ ÑƒÐ¶Ðµ ÑÐºÑ€Ð°Ð½Ð½Ñ‹Ð¹ Ð¼Ð°ÑÑˆÑ‚Ð°Ð±.
   const int labelOffsetInScreenPixels = 5;
   if (this->model->topDoorCordForce != nullptr) {
     Point labelPoint = Point{ (p1.x + p2.x) / 2 + labelOffsetInScreenPixels, (p1.y + p2.y) / 2 };
@@ -41,7 +41,7 @@ void ModelRenderer::drawAmmo() {
   Point p1 = this->model->topDoor->getFixedAmmoPoint();
   Point p2 = this->model->topDoor->getAmmoPoint();
   this->drawLine(&p1, &p2);
-  // Ïîñëå drawLine p1 è p2 èìåþò óæå ýêðàííûé ìàñøòàá.
+  // ÐŸÐ¾ÑÐ»Ðµ drawLine p1 Ð¸ p2 Ð¸Ð¼ÐµÑŽÑ‚ ÑƒÐ¶Ðµ ÑÐºÑ€Ð°Ð½Ð½Ñ‹Ð¹ Ð¼Ð°ÑÑˆÑ‚Ð°Ð±.
   const int labelOffsetInScreenPixels = 5;
   Point labelPoint = Point{ (p1.x + p2.x) / 2 + labelOffsetInScreenPixels, (p1.y + p2.y) / 2 };
   this->drawTextScaled(labelPoint, "%.2f", this->model->ammoLength);
@@ -52,7 +52,7 @@ void ModelRenderer::drawAngle() {
   this->scaleToScreen(labelPoint);
   const int labelOffsetInScreenPixels = 20;
   labelPoint->x -= labelOffsetInScreenPixels;
-  this->drawTextScaled(*labelPoint, "%.0f°", this->model->topDoor->getAngle()*180/PI);
+  this->drawTextScaled(*labelPoint, "%.0fÂ°", this->model->topDoor->getAngle()*180/PI);
 }
 
 void ModelRenderer::drawForce() {
@@ -63,7 +63,7 @@ void ModelRenderer::drawForce() {
     topDoorGripPoint.y+scaledForceLength * sinf(this->model->topDoorGripForce->angle),
   };
   this->drawLine(&topDoorGripPoint, &forceEndPoint);
-  // Ïîñëå drawLine topDoorGripPoint è forceEndPoint èìåþò óæå ýêðàííûé ìàñøòàá.
+  // ÐŸÐ¾ÑÐ»Ðµ drawLine topDoorGripPoint Ð¸ forceEndPoint Ð¸Ð¼ÐµÑŽÑ‚ ÑƒÐ¶Ðµ ÑÐºÑ€Ð°Ð½Ð½Ñ‹Ð¹ Ð¼Ð°ÑÑˆÑ‚Ð°Ð±.
   float arrowLeftWingAngle = this->model->topDoorGripForce->angle - PI - PI / 6;
   float arrowRightWingAngle = this->model->topDoorGripForce->angle - PI + PI / 6;
   const float arrowWingLengthInScreenPixels = 10;
@@ -85,25 +85,25 @@ void ModelRenderer::drawForce() {
 }
 
 void ModelRenderer::draw() {
-  // Âåðõíÿÿ äâåðü - êîðè÷íåâàÿ
+  // Ð’ÐµÑ€Ñ…Ð½ÑÑ Ð´Ð²ÐµÑ€ÑŒ - ÐºÐ¾Ñ€Ð¸Ñ‡Ð½ÐµÐ²Ð°Ñ
   this->foreground = { 0xAE, 0x7D, 0x1F, 0xFF };
   this->drawDoor(this->model->topDoor);
 
-  // Óãîë âåðõíåé äâåðè.
+  // Ð£Ð³Ð¾Ð» Ð²ÐµÑ€Ñ…Ð½ÐµÐ¹ Ð´Ð²ÐµÑ€Ð¸.
   this->drawAngle();
 
-  // Óñèëèå äëÿ ïîäúåìà âåðõíåé äâåðè.
+  // Ð£ÑÐ¸Ð»Ð¸Ðµ Ð´Ð»Ñ Ð¿Ð¾Ð´ÑŠÐµÐ¼Ð° Ð²ÐµÑ€Ñ…Ð½ÐµÐ¹ Ð´Ð²ÐµÑ€Ð¸.
   this->drawForce();
 
-  // Íèæíÿÿ äâåðü - çåëåíàÿ
+  // ÐÐ¸Ð¶Ð½ÑÑ Ð´Ð²ÐµÑ€ÑŒ - Ð·ÐµÐ»ÐµÐ½Ð°Ñ
   this->foreground = { 0x00, 0xFF, 0x00, 0xFF };
   this->drawDoor(model->bottomDoor);
 
-  // Âåðåâî÷êà - ÷åðíàÿ
+  // Ð’ÐµÑ€ÐµÐ²Ð¾Ñ‡ÐºÐ° - Ñ‡ÐµÑ€Ð½Ð°Ñ
   this->foreground = { 0x00, 0x00, 0x00, 0xFF };
   this->drawCord();
 
-  // Àìîðòèçàòîð - êðàñíûé
+  // ÐÐ¼Ð¾Ñ€Ñ‚Ð¸Ð·Ð°Ñ‚Ð¾Ñ€ - ÐºÑ€Ð°ÑÐ½Ñ‹Ð¹
   this->foreground = { 0xFF, 0x00, 0x00, 0xFF };
   this->drawAmmo();
 }
